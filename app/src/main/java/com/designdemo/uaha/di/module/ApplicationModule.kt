@@ -13,4 +13,25 @@ class ApplicationModule {
     @Provides
     fun provideApplicationContext(application: HistorianApplication): Context =
             application.applicationContext
+
+
+
+    @Singleton
+    @Provides
+    fun provideWolfson() : Wolfson {
+
+        return object : Wolfson {
+            override fun foo() {
+
+            }
+        }
+
+    }
+
+
+
+    interface Wolfson {
+        fun foo()
+    }
+
 }

@@ -21,13 +21,16 @@ import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
 import com.designdemo.uaha.data.model.detail.DetailEntity
 import com.designdemo.uaha.data.model.product.ProductEntity
+import com.designdemo.uaha.di.module.ApplicationModule
 import com.designdemo.uaha.util.UiUtil
 import com.designdemo.uaha.view.demo.BottomNavActivity
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
 import com.support.android.designlibdemo.R
 import com.support.android.designlibdemo.R.color.black
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_detail.*
+import javax.inject.Inject
 import kotlin.random.Random
 
 class DetailActivity : AppCompatActivity() {
@@ -37,9 +40,16 @@ class DetailActivity : AppCompatActivity() {
 
     private var localProdItem: ProductEntity? = null
 
-    private lateinit var detailViewModelImpl: DetailViewModelImpl
+    //private lateinit var detailViewModelImpl: DetailViewModelImpl
 
     private var androidName = "unset"
+
+
+    @Inject
+    protected lateinit var wolfson: ApplicationModule.Wolfson
+
+    @Inject
+    protected lateinit var detailViewModelImpl: DetailViewModel
 
     companion object {
         private const val TAG = "DetailActivity"
@@ -51,11 +61,14 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(com.support.android.designlibdemo.R.layout.activity_detail)
 
+        AndroidInjection.inject(this)
+
+
         if (androidName === "unset") {
             androidName = intent.getStringExtra(EXTRA_APP_NAME)
         }
 
-        detailViewModelImpl = ViewModelProviders.of(this).get(DetailViewModelImpl::class.java)
+        //detailViewModelImpl = ViewModelProviders.of(this).get(DetailViewModelImpl::class.java)
 
         if (Intent.ACTION_SEARCH == intent.action) {
             val query = intent.getStringExtra(SearchManager.QUERY)
