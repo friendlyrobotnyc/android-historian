@@ -18,10 +18,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 import kotlin.coroutines.CoroutineContext
 
-class DetailViewModelImpl(application: Application) : AndroidViewModel(application), CoroutineScope, DetailViewModel {
+class DetailViewModelImpl @Inject constructor(application: Application) : AndroidViewModel(application), CoroutineScope, DetailViewModel {
 
     override val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.Main

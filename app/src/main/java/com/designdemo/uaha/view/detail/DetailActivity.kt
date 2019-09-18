@@ -49,7 +49,7 @@ class DetailActivity : AppCompatActivity() {
     protected lateinit var wolfson: ApplicationModule.Wolfson
 
     @Inject
-    protected lateinit var detailViewModelImpl: DetailViewModel
+    protected lateinit var detailViewModelImpl: DetailViewModelImpl
 
     companion object {
         private const val TAG = "DetailActivity"
@@ -67,8 +67,6 @@ class DetailActivity : AppCompatActivity() {
         if (androidName === "unset") {
             androidName = intent.getStringExtra(EXTRA_APP_NAME)
         }
-
-        //detailViewModelImpl = ViewModelProviders.of(this).get(DetailViewModelImpl::class.java)
 
         if (Intent.ACTION_SEARCH == intent.action) {
             val query = intent.getStringExtra(SearchManager.QUERY)
